@@ -128,7 +128,7 @@ autoCoinsCheck.Parent = autoCoinsFrame
 autoCoinsCheck.Size = UDim2.new(0.2, 0, 1, 0)
 autoCoinsCheck.Position = UDim2.new(0.8, 0, 0, 0)
 autoCoinsCheck.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
-autoCoinsCheck.Text = "✓"
+autoCoinsCheck.Text = ""
 autoCoinsCheck.TextColor3 = Color3.fromRGB(255, 255, 255)
 autoCoinsCheck.TextSize = 24
 
@@ -159,7 +159,7 @@ autoWinsCheck.Parent = autoWinsFrame
 autoWinsCheck.Size = UDim2.new(0.2, 0, 1, 0)
 autoWinsCheck.Position = UDim2.new(0.8, 0, 0, 0)
 autoWinsCheck.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
-autoWinsCheck.Text = "✓"
+autoWinsCheck.Text = ""
 autoWinsCheck.TextColor3 = Color3.fromRGB(255, 255, 255)
 autoWinsCheck.TextSize = 24
 
@@ -239,7 +239,7 @@ autoCoinsCheck.MouseButton1Click:Connect(function()
 	autoCoinsOn = not autoCoinsOn
 	if autoCoinsOn then
 		autoCoinsCheck.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
-		autoCoinsCheck.Text = "✓"
+		autoCoinsCheck.Text = ""
 	else
 		autoCoinsCheck.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
 		autoCoinsCheck.Text = ""
@@ -250,7 +250,7 @@ autoWinsCheck.MouseButton1Click:Connect(function()
 	autoWinsOn = not autoWinsOn
 	if autoWinsOn then
 		autoWinsCheck.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
-		autoWinsCheck.Text = "✓"
+		autoWinsCheck.Text = ""
 	else
 		autoWinsCheck.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
 		autoWinsCheck.Text = ""
@@ -261,7 +261,7 @@ autoHatchCheck.MouseButton1Click:Connect(function()
 	autoHatchOn = not autoHatchOn
 	if autoHatchOn then
 		autoHatchCheck.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
-		autoHatchCheck.Text = "✓"
+		autoHatchCheck.Text = ""
 	else
 		autoHatchCheck.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
 		autoHatchCheck.Text = ""
