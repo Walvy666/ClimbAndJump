@@ -305,18 +305,48 @@ game:GetService("RunService").RenderStepped:Connect(function()
     end
 
     if autoCoinsOn then
-        -- Placeholder for auto coins logic
-        -- Example: find and collect coins
+        local coinsFolder = workspace:FindFirstChild("Coins")
+        if coinsFolder then
+            for _, coin in pairs(coinsFolder:GetChildren()) do
+                if coin:IsA("BasePart") then
+                    local magnitude = (player.Character.HumanoidRootPart.Position - coin.Position).magnitude
+                    if magnitude < 50 then -- Only collect coins within a certain range
+                        player.Character.HumanoidRootPart.CFrame = CFrame.new(coin.Position)
+                        wait(0.1)
+                    end
+                end
+            end
+        end
     end
 
     if autoWinsOn then
-        -- Placeholder for auto wins logic
-        -- Example: teleport to the end
+        local finishPart = workspace:FindFirstChild("Finish")
+        if finishPart and finishPart:IsA("BasePart") then
+            player.Character.HumanoidRootPart.CFrame = CFrame.new(finishPart.Position)
+        end
     end
 
     if autoHatchOn then
-        -- Placeholder for auto hatch logic
-        -- Example: find and hatch nearest egg
+        local eggsFolder = workspace:FindFirstChild("Eggs")
+        if eggsFolder then
+            local nearestEgg = nil
+            local shortestDistance = math.huge
+
+            for _, egg in pairs(eggsFolder:GetChildren()) do
+                if egg:IsA("BasePart") then
+                    local distance = (player.Character.HumanoidRootPart.Position - egg.Position).magnitude
+                    if distance < shortestDistance then
+                        shortestDistance = distance
+                        nearestEgg = egg
+                    end
+                end
+            end
+
+            if nearestEgg then
+                -- Fire the remote event to hatch the egg
+                game.ReplicatedStorage.HatchEgg:FireServer(nearestEgg)
+            end
+        end
     end
 
     -- Set Height
