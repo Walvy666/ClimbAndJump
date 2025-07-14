@@ -1,6 +1,6 @@
 -- Membuat ScreenGui
 local screenGui = Instance.new("ScreenGui")
-screenGui.Name = "ClimbAndJumpGui"
+screenGui.Name = "AutoHatchGui"
 screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 
 -- Membuat Frame utama
@@ -8,362 +8,54 @@ local mainFrame = Instance.new("Frame")
 mainFrame.Name = "MainFrame"
 mainFrame.Parent = screenGui
 mainFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-mainFrame.Size = UDim2.new(0, 350, 0, 400)
-mainFrame.Position = UDim2.new(0.5, -175, 0.5, -200)
+mainFrame.Size = UDim2.new(0, 200, 0, 100)
+mainFrame.Position = UDim2.new(0.5, -100, 0.5, -50)
 mainFrame.Active = true
 mainFrame.Draggable = true
 mainFrame.BorderSizePixel = 0
-mainFrame.ClipsDescendants = true
 
--- Menambahkan UILayout
-local listLayout = Instance.new("UIListLayout")
-listLayout.Parent = mainFrame
-listLayout.SortOrder = Enum.SortOrder.LayoutOrder
-listLayout.Padding = UDim.new(0, 5)
-listLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+-- Membuat Tombol Auto Hatch
+local autoHatchButton = Instance.new("TextButton")
+autoHatchButton.Name = "AutoHatchButton"
+autoHatchButton.Parent = mainFrame
+autoHatchButton.Size = UDim2.new(1, -20, 1, -20)
+autoHatchButton.Position = UDim2.new(0.5, 0, 0.5, 0)
+autoHatchButton.AnchorPoint = Vector2.new(0.5, 0.5)
+autoHatchButton.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
+autoHatchButton.Text = "Auto Hatch: Off"
+autoHatchButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+autoHatchButton.TextSize = 24
 
--- Membuat Judul
-local titleLabel = Instance.new("TextLabel")
-titleLabel.Name = "TitleLabel"
-titleLabel.Parent = mainFrame
-titleLabel.Size = UDim2.new(1, 0, 0, 50)
-titleLabel.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-titleLabel.BackgroundTransparency = 1
-titleLabel.Font = Enum.Font.SourceSansBold
-titleLabel.Text = "CLIMB AND JUMP TOWER"
-titleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-titleLabel.TextSize = 24
-titleLabel.LayoutOrder = 1
-
--- Membuat Input "Set Height"
-local setHeightFrame = Instance.new("Frame")
-setHeightFrame.Name = "SetHeightFrame"
-setHeightFrame.Parent = mainFrame
-setHeightFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-setHeightFrame.BackgroundTransparency = 1
-setHeightFrame.Size = UDim2.new(1, -20, 0, 40)
-setHeightFrame.LayoutOrder = 2
-
-local setHeightLabel = Instance.new("TextLabel")
-setHeightLabel.Name = "SetHeightLabel"
-setHeightLabel.Parent = setHeightFrame
-setHeightLabel.Size = UDim2.new(0.5, 0, 1, 0)
-setHeightLabel.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-setHeightLabel.BackgroundTransparency = 1
-setHeightLabel.Font = Enum.Font.SourceSans
-setHeightLabel.Text = "Set Height"
-setHeightLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-setHeightLabel.TextSize = 18
-setHeightLabel.TextXAlignment = Enum.TextXAlignment.Left
-
-local setHeightBox = Instance.new("TextBox")
-setHeightBox.Name = "SetHeightBox"
-setHeightBox.Parent = setHeightFrame
-setHeightBox.Size = UDim2.new(0.5, 0, 1, 0)
-setHeightBox.Position = UDim2.new(0.5, 0, 0, 0)
-setHeightBox.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
-setHeightBox.BorderSizePixel = 0
-setHeightBox.Font = Enum.Font.SourceSans
-setHeightBox.Text = "500"
-setHeightBox.TextColor3 = Color3.fromRGB(255, 255, 255)
-setHeightBox.TextSize = 18
-
--- Membuat Input "Jump Time"
-local jumpTimeFrame = Instance.new("Frame")
-jumpTimeFrame.Name = "JumpTimeFrame"
-jumpTimeFrame.Parent = mainFrame
-jumpTimeFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-jumpTimeFrame.BackgroundTransparency = 1
-jumpTimeFrame.Size = UDim2.new(1, -20, 0, 40)
-jumpTimeFrame.LayoutOrder = 3
-
-local jumpTimeLabel = Instance.new("TextLabel")
-jumpTimeLabel.Name = "JumpTimeLabel"
-jumpTimeLabel.Parent = jumpTimeFrame
-jumpTimeLabel.Size = UDim2.new(0.5, 0, 1, 0)
-jumpTimeLabel.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-jumpTimeLabel.BackgroundTransparency = 1
-jumpTimeLabel.Font = Enum.Font.SourceSans
-jumpTimeLabel.Text = "Jump Time (sec)"
-jumpTimeLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-jumpTimeLabel.TextSize = 18
-jumpTimeLabel.TextXAlignment = Enum.TextXAlignment.Left
-
-local jumpTimeBox = Instance.new("TextBox")
-jumpTimeBox.Name = "JumpTimeBox"
-jumpTimeBox.Parent = jumpTimeFrame
-jumpTimeBox.Size = UDim2.new(0.5, 0, 1, 0)
-jumpTimeBox.Position = UDim2.new(0.5, 0, 0, 0)
-jumpTimeBox.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
-jumpTimeBox.BorderSizePixel = 0
-jumpTimeBox.Font = Enum.Font.SourceSans
-jumpTimeBox.Text = "3"
-jumpTimeBox.TextColor3 = Color3.fromRGB(255, 255, 255)
-jumpTimeBox.TextSize = 18
-
--- Membuat Checkbox "Auto Coins"
-local autoCoinsFrame = Instance.new("Frame")
-autoCoinsFrame.Name = "AutoCoinsFrame"
-autoCoinsFrame.Parent = mainFrame
-autoCoinsFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-autoCoinsFrame.BackgroundTransparency = 1
-autoCoinsFrame.Size = UDim2.new(1, -20, 0, 40)
-autoCoinsFrame.LayoutOrder = 4
-
-local autoCoinsLabel = Instance.new("TextLabel")
-autoCoinsLabel.Name = "AutoCoinsLabel"
-autoCoinsLabel.Parent = autoCoinsFrame
-autoCoinsLabel.Size = UDim2.new(0.8, 0, 1, 0)
-autoCoinsLabel.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-autoCoinsLabel.BackgroundTransparency = 1
-autoCoinsLabel.Font = Enum.Font.SourceSans
-autoCoinsLabel.Text = "Auto Coins"
-autoCoinsLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-autoCoinsLabel.TextSize = 18
-autoCoinsLabel.TextXAlignment = Enum.TextXAlignment.Left
-
-local autoCoinsCheck = Instance.new("TextButton")
-autoCoinsCheck.Name = "AutoCoinsCheck"
-autoCoinsCheck.Parent = autoCoinsFrame
-autoCoinsCheck.Size = UDim2.new(0.2, 0, 1, 0)
-autoCoinsCheck.Position = UDim2.new(0.8, 0, 0, 0)
-autoCoinsCheck.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
-autoCoinsCheck.Text = "✓"
-autoCoinsCheck.TextColor3 = Color3.fromRGB(255, 255, 255)
-autoCoinsCheck.TextSize = 24
-
--- Membuat Checkbox "Auto Wins"
-local autoWinsFrame = Instance.new("Frame")
-autoWinsFrame.Name = "AutoWinsFrame"
-autoWinsFrame.Parent = mainFrame
-autoWinsFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-autoWinsFrame.BackgroundTransparency = 1
-autoWinsFrame.Size = UDim2.new(1, -20, 0, 40)
-autoWinsFrame.LayoutOrder = 5
-
-local autoWinsLabel = Instance.new("TextLabel")
-autoWinsLabel.Name = "AutoWinsLabel"
-autoWinsLabel.Parent = autoWinsFrame
-autoWinsLabel.Size = UDim2.new(0.8, 0, 1, 0)
-autoWinsLabel.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-autoWinsLabel.BackgroundTransparency = 1
-autoWinsLabel.Font = Enum.Font.SourceSans
-autoWinsLabel.Text = "Auto Wins"
-autoWinsLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-autoWinsLabel.TextSize = 18
-autoWinsLabel.TextXAlignment = Enum.TextXAlignment.Left
-
-local autoWinsCheck = Instance.new("TextButton")
-autoWinsCheck.Name = "AutoWinsCheck"
-autoWinsCheck.Parent = autoWinsFrame
-autoWinsCheck.Size = UDim2.new(0.2, 0, 1, 0)
-autoWinsCheck.Position = UDim2.new(0.8, 0, 0, 0)
-autoWinsCheck.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
-autoWinsCheck.Text = "✓"
-autoWinsCheck.TextColor3 = Color3.fromRGB(255, 255, 255)
-autoWinsCheck.TextSize = 24
-
--- Membuat Checkbox "Auto Hatch"
-local autoHatchFrame = Instance.new("Frame")
-autoHatchFrame.Name = "AutoHatchFrame"
-autoHatchFrame.Parent = mainFrame
-autoHatchFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-autoHatchFrame.BackgroundTransparency = 1
-autoHatchFrame.Size = UDim2.new(1, -20, 0, 40)
-autoHatchFrame.LayoutOrder = 6
-
-local autoHatchLabel = Instance.new("TextLabel")
-autoHatchLabel.Name = "AutoHatchLabel"
-autoHatchLabel.Parent = autoHatchFrame
-autoHatchLabel.Size = UDim2.new(0.8, 0, 1, 0)
-autoHatchLabel.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-autoHatchLabel.BackgroundTransparency = 1
-autoHatchLabel.Font = Enum.Font.SourceSans
-autoHatchLabel.Text = "Auto Hatch (Nearest)"
-autoHatchLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-autoHatchLabel.TextSize = 18
-autoHatchLabel.TextXAlignment = Enum.TextXAlignment.Left
-
-local autoHatchCheck = Instance.new("TextButton")
-autoHatchCheck.Name = "AutoHatchCheck"
-autoHatchCheck.Parent = autoHatchFrame
-autoHatchCheck.Size = UDim2.new(0.2, 0, 1, 0)
-autoHatchCheck.Position = UDim2.new(0.8, 0, 0, 0)
-autoHatchCheck.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
-autoHatchCheck.Text = ""
-autoHatchCheck.TextColor3 = Color3.fromRGB(255, 255, 255)
-autoHatchCheck.TextSize = 24
-
--- Membuat Label YouTube
-local youtubeLabel = Instance.new("TextLabel")
-youtubeLabel.Name = "YoutubeLabel"
-youtubeLabel.Parent = mainFrame
-youtubeLabel.Size = UDim2.new(1, 0, 0, 50)
-youtubeLabel.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-youtubeLabel.BackgroundTransparency = 1
-youtubeLabel.Font = Enum.Font.SourceSans
-youtubeLabel.Text = "YouTube: Tora IsMe"
-youtubeLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-youtubeLabel.TextSize = 18
-youtubeLabel.LayoutOrder = 7
-
--- Tombol Minimize
-local minimizeButton = Instance.new("TextButton")
-minimizeButton.Name = "MinimizeButton"
-minimizeButton.Parent = mainFrame
-minimizeButton.Size = UDim2.new(0, 30, 0, 30)
-minimizeButton.Position = UDim2.new(1, -35, 0, 5)
-minimizeButton.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
-minimizeButton.Text = "-"
-minimizeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-minimizeButton.TextSize = 24
-
--- Tombol Open
-local openButton = Instance.new("TextButton")
-openButton.Name = "OpenButton"
-openButton.Parent = screenGui
-openButton.Size = UDim2.new(0, 150, 0, 50)
-openButton.Position = UDim2.new(0.5, -75, 0.5, -25)
-openButton.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-openButton.Text = "Open"
-openButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-openButton.TextSize = 24
-openButton.Visible = false
-
--- Fungsi untuk checkbox
-local autoCoinsOn = false
-local autoWinsOn = false
+-- Logika Auto Hatch
 local autoHatchOn = false
 
-autoCoinsCheck.MouseButton1Click:Connect(function()
-	autoCoinsOn = not autoCoinsOn
-	if autoCoinsOn then
-		autoCoinsCheck.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
-		autoCoinsCheck.Text = "✓"
-	else
-		autoCoinsCheck.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
-		autoCoinsCheck.Text = ""
-	end
-end)
-
-autoWinsCheck.MouseButton1Click:Connect(function()
-	autoWinsOn = not autoWinsOn
-	if autoWinsOn then
-		autoWinsCheck.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
-		autoWinsCheck.Text = "✓"
-	else
-		autoWinsCheck.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
-		autoWinsCheck.Text = ""
-	end
-end)
-
-autoHatchCheck.MouseButton1Click:Connect(function()
+autoHatchButton.MouseButton1Click:Connect(function()
 	autoHatchOn = not autoHatchOn
 	if autoHatchOn then
-		autoHatchCheck.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
-		autoHatchCheck.Text = "✓"
+		autoHatchButton.Text = "Auto Hatch: On"
+		autoHatchButton.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
 	else
-		autoHatchCheck.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
-		autoHatchCheck.Text = ""
+		autoHatchButton.Text = "Auto Hatch: Off"
+		autoHatchButton.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
 	end
 end)
 
--- Fungsi untuk input
-local height = 500
-local jumpTime = 3
-
-setHeightBox.FocusLost:Connect(function(enterPressed)
-	if enterPressed then
-		local newHeight = tonumber(setHeightBox.Text)
-		if newHeight then
-			height = newHeight
-		end
-	end
-end)
-
--- Fungsi Minimize/Maximize
-minimizeButton.MouseButton1Click:Connect(function()
-	mainFrame.Visible = false
-	openButton.Visible = true
-end)
-
-openButton.MouseButton1Click:Connect(function()
-	mainFrame.Visible = true
-	openButton.Visible = false
-end)
-
--- Core Logic
 game:GetService("RunService").RenderStepped:Connect(function()
-    local player = game.Players.LocalPlayer
-    if not player or not player.Character or not player.Character:FindFirstChild("HumanoidRootPart") then
-        return
-    end
-
-    local humanoid = player.Character:FindFirstChildOfClass("Humanoid")
-    if not humanoid then
-        return
-    end
-
-    if autoCoinsOn then
-        local coinsFolder = workspace:FindFirstChild("Coins")
-        if coinsFolder then
-            for _, coin in pairs(coinsFolder:GetChildren()) do
-                if coin:IsA("BasePart") then
-                    local magnitude = (player.Character.HumanoidRootPart.Position - coin.Position).magnitude
-                    if magnitude < 50 then -- Only collect coins within a certain range
-                        player.Character.HumanoidRootPart.CFrame = CFrame.new(coin.Position)
-                        wait(0.1)
-                    end
-                end
-            end
-        end
-    end
-
-    if autoWinsOn then
-        local finishPart = workspace:FindFirstChild("Finish")
-        if finishPart and finishPart:IsA("BasePart") then
-            player.Character.HumanoidRootPart.CFrame = CFrame.new(finishPart.Position)
-        end
-    end
-
     if autoHatchOn then
         local eggsFolder = workspace:FindFirstChild("Eggs")
         if eggsFolder then
-            local nearestEgg = nil
-            local shortestDistance = math.huge
-
-            for _, egg in pairs(eggsFolder:GetChildren()) do
-                if egg:IsA("BasePart") then
-                    local distance = (player.Character.HumanoidRootPart.Position - egg.Position).magnitude
-                    if distance < shortestDistance then
-                        shortestDistance = distance
-                        nearestEgg = egg
+            local tradeableEgg = eggsFolder:GetChildren()[1]
+            if tradeableEgg then
+                local buyEggEvent = game.ReplicatedStorage:FindFirstChild("BuyEgg")
+                if buyEggEvent then
+                    buyEggEvent:FireServer(tradeableEgg)
+                    wait(1) -- Wait for the egg to be purchased
+                    local hatchEggEvent = game.ReplicatedStorage:FindFirstChild("HatchEgg")
+                    if hatchEggEvent then
+                        hatchEggEvent:FireServer(tradeableEgg)
                     end
-                end
-            end
-
-            if nearestEgg then
-                local hatchEggEvent = game.ReplicatedStorage:FindFirstChild("HatchEgg")
-                if hatchEggEvent then
-                    hatchEggEvent:FireServer(nearestEgg)
                 end
             end
         end
     end
-
-    -- Set Height
-    local rootPart = player.Character.HumanoidRootPart
-    rootPart.CFrame = CFrame.new(rootPart.Position.X, height, rootPart.Position.Z)
-
-    -- Jump Time
-    humanoid.JumpPower = 100 -- Example value, can be adjusted
-end)
-
-jumpTimeBox.FocusLost:Connect(function(enterPressed)
-	if enterPressed then
-		local newJumpTime = tonumber(jumpTimeBox.Text)
-		if newJumpTime then
-			jumpTime = newJumpTime
-		end
-	end
 end)
