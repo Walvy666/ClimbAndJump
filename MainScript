@@ -206,3 +206,98 @@ youtubeLabel.Text = "YouTube: Tora IsMe"
 youtubeLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 youtubeLabel.TextSize = 18
 youtubeLabel.LayoutOrder = 7
+
+-- Fungsi untuk checkbox
+local autoCoinsOn = true
+local autoWinsOn = true
+local autoHatchOn = false
+
+autoCoinsCheck.MouseButton1Click:Connect(function()
+	autoCoinsOn = not autoCoinsOn
+	if autoCoinsOn then
+		autoCoinsCheck.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+		autoCoinsCheck.Text = "✓"
+	else
+		autoCoinsCheck.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
+		autoCoinsCheck.Text = ""
+	end
+end)
+
+autoWinsCheck.MouseButton1Click:Connect(function()
+	autoWinsOn = not autoWinsOn
+	if autoWinsOn then
+		autoWinsCheck.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+		autoWinsCheck.Text = "✓"
+	else
+		autoWinsCheck.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
+		autoWinsCheck.Text = ""
+	end
+end)
+
+autoHatchCheck.MouseButton1Click:Connect(function()
+	autoHatchOn = not autoHatchOn
+	if autoHatchOn then
+		autoHatchCheck.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+		autoHatchCheck.Text = "✓"
+	else
+		autoHatchCheck.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
+		autoHatchCheck.Text = ""
+	end
+end)
+
+-- Fungsi untuk input
+local height = 500
+local jumpTime = 3
+
+setHeightBox.FocusLost:Connect(function(enterPressed)
+	if enterPressed then
+		local newHeight = tonumber(setHeightBox.Text)
+		if newHeight then
+			height = newHeight
+		end
+	end
+end)
+
+-- Core Logic
+game:GetService("RunService").RenderStepped:Connect(function()
+    local player = game.Players.LocalPlayer
+    if not player or not player.Character or not player.Character:FindFirstChild("HumanoidRootPart") then
+        return
+    end
+
+    local humanoid = player.Character:FindFirstChildOfClass("Humanoid")
+    if not humanoid then
+        return
+    end
+
+    if autoCoinsOn then
+        -- Placeholder for auto coins logic
+        -- Example: find and collect coins
+    end
+
+    if autoWinsOn then
+        -- Placeholder for auto wins logic
+        -- Example: teleport to the end
+    end
+
+    if autoHatchOn then
+        -- Placeholder for auto hatch logic
+        -- Example: find and hatch nearest egg
+    end
+
+    -- Set Height
+    local rootPart = player.Character.HumanoidRootPart
+    rootPart.CFrame = CFrame.new(rootPart.Position.X, height, rootPart.Position.Z)
+
+    -- Jump Time
+    humanoid.JumpPower = 100 -- Example value, can be adjusted
+end)
+
+jumpTimeBox.FocusLost:Connect(function(enterPressed)
+	if enterPressed then
+		local newJumpTime = tonumber(jumpTimeBox.Text)
+		if newJumpTime then
+			jumpTime = newJumpTime
+		end
+	end
+end)
