@@ -1,0 +1,208 @@
+-- Membuat ScreenGui
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "ClimbAndJumpGui"
+screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+-- Membuat Frame utama
+local mainFrame = Instance.new("Frame")
+mainFrame.Name = "MainFrame"
+mainFrame.Parent = screenGui
+mainFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+mainFrame.Size = UDim2.new(0, 350, 0, 400)
+mainFrame.Position = UDim2.new(0.5, -175, 0.5, -200)
+mainFrame.Active = true
+mainFrame.Draggable = true
+mainFrame.BorderSizePixel = 0
+mainFrame.ClipsDescendants = true
+
+-- Menambahkan UILayout
+local listLayout = Instance.new("UIListLayout")
+listLayout.Parent = mainFrame
+listLayout.SortOrder = Enum.SortOrder.LayoutOrder
+listLayout.Padding = UDim.new(0, 5)
+listLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+
+-- Membuat Judul
+local titleLabel = Instance.new("TextLabel")
+titleLabel.Name = "TitleLabel"
+titleLabel.Parent = mainFrame
+titleLabel.Size = UDim2.new(1, 0, 0, 50)
+titleLabel.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+titleLabel.BackgroundTransparency = 1
+titleLabel.Font = Enum.Font.SourceSansBold
+titleLabel.Text = "CLIMB AND JUMP TOWER"
+titleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+titleLabel.TextSize = 24
+titleLabel.LayoutOrder = 1
+
+-- Membuat Input "Set Height"
+local setHeightFrame = Instance.new("Frame")
+setHeightFrame.Name = "SetHeightFrame"
+setHeightFrame.Parent = mainFrame
+setHeightFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+setHeightFrame.BackgroundTransparency = 1
+setHeightFrame.Size = UDim2.new(1, -20, 0, 40)
+setHeightFrame.LayoutOrder = 2
+
+local setHeightLabel = Instance.new("TextLabel")
+setHeightLabel.Name = "SetHeightLabel"
+setHeightLabel.Parent = setHeightFrame
+setHeightLabel.Size = UDim2.new(0.5, 0, 1, 0)
+setHeightLabel.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+setHeightLabel.BackgroundTransparency = 1
+setHeightLabel.Font = Enum.Font.SourceSans
+setHeightLabel.Text = "Set Height"
+setHeightLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+setHeightLabel.TextSize = 18
+setHeightLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+local setHeightBox = Instance.new("TextBox")
+setHeightBox.Name = "SetHeightBox"
+setHeightBox.Parent = setHeightFrame
+setHeightBox.Size = UDim2.new(0.5, 0, 1, 0)
+setHeightBox.Position = UDim2.new(0.5, 0, 0, 0)
+setHeightBox.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+setHeightBox.BorderSizePixel = 0
+setHeightBox.Font = Enum.Font.SourceSans
+setHeightBox.Text = "500"
+setHeightBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+setHeightBox.TextSize = 18
+
+-- Membuat Input "Jump Time"
+local jumpTimeFrame = Instance.new("Frame")
+jumpTimeFrame.Name = "JumpTimeFrame"
+jumpTimeFrame.Parent = mainFrame
+jumpTimeFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+jumpTimeFrame.BackgroundTransparency = 1
+jumpTimeFrame.Size = UDim2.new(1, -20, 0, 40)
+jumpTimeFrame.LayoutOrder = 3
+
+local jumpTimeLabel = Instance.new("TextLabel")
+jumpTimeLabel.Name = "JumpTimeLabel"
+jumpTimeLabel.Parent = jumpTimeFrame
+jumpTimeLabel.Size = UDim2.new(0.5, 0, 1, 0)
+jumpTimeLabel.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+jumpTimeLabel.BackgroundTransparency = 1
+jumpTimeLabel.Font = Enum.Font.SourceSans
+jumpTimeLabel.Text = "Jump Time (sec)"
+jumpTimeLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+jumpTimeLabel.TextSize = 18
+jumpTimeLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+local jumpTimeBox = Instance.new("TextBox")
+jumpTimeBox.Name = "JumpTimeBox"
+jumpTimeBox.Parent = jumpTimeFrame
+jumpTimeBox.Size = UDim2.new(0.5, 0, 1, 0)
+jumpTimeBox.Position = UDim2.new(0.5, 0, 0, 0)
+jumpTimeBox.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+jumpTimeBox.BorderSizePixel = 0
+jumpTimeBox.Font = Enum.Font.SourceSans
+jumpTimeBox.Text = "3"
+jumpTimeBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+jumpTimeBox.TextSize = 18
+
+-- Membuat Checkbox "Auto Coins"
+local autoCoinsFrame = Instance.new("Frame")
+autoCoinsFrame.Name = "AutoCoinsFrame"
+autoCoinsFrame.Parent = mainFrame
+autoCoinsFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+autoCoinsFrame.BackgroundTransparency = 1
+autoCoinsFrame.Size = UDim2.new(1, -20, 0, 40)
+autoCoinsFrame.LayoutOrder = 4
+
+local autoCoinsLabel = Instance.new("TextLabel")
+autoCoinsLabel.Name = "AutoCoinsLabel"
+autoCoinsLabel.Parent = autoCoinsFrame
+autoCoinsLabel.Size = UDim2.new(0.8, 0, 1, 0)
+autoCoinsLabel.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+autoCoinsLabel.BackgroundTransparency = 1
+autoCoinsLabel.Font = Enum.Font.SourceSans
+autoCoinsLabel.Text = "Auto Coins"
+autoCoinsLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+autoCoinsLabel.TextSize = 18
+autoCoinsLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+local autoCoinsCheck = Instance.new("TextButton")
+autoCoinsCheck.Name = "AutoCoinsCheck"
+autoCoinsCheck.Parent = autoCoinsFrame
+autoCoinsCheck.Size = UDim2.new(0.2, 0, 1, 0)
+autoCoinsCheck.Position = UDim2.new(0.8, 0, 0, 0)
+autoCoinsCheck.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+autoCoinsCheck.Text = "✓"
+autoCoinsCheck.TextColor3 = Color3.fromRGB(255, 255, 255)
+autoCoinsCheck.TextSize = 24
+
+-- Membuat Checkbox "Auto Wins"
+local autoWinsFrame = Instance.new("Frame")
+autoWinsFrame.Name = "AutoWinsFrame"
+autoWinsFrame.Parent = mainFrame
+autoWinsFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+autoWinsFrame.BackgroundTransparency = 1
+autoWinsFrame.Size = UDim2.new(1, -20, 0, 40)
+autoWinsFrame.LayoutOrder = 5
+
+local autoWinsLabel = Instance.new("TextLabel")
+autoWinsLabel.Name = "AutoWinsLabel"
+autoWinsLabel.Parent = autoWinsFrame
+autoWinsLabel.Size = UDim2.new(0.8, 0, 1, 0)
+autoWinsLabel.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+autoWinsLabel.BackgroundTransparency = 1
+autoWinsLabel.Font = Enum.Font.SourceSans
+autoWinsLabel.Text = "Auto Wins"
+autoWinsLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+autoWinsLabel.TextSize = 18
+autoWinsLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+local autoWinsCheck = Instance.new("TextButton")
+autoWinsCheck.Name = "AutoWinsCheck"
+autoWinsCheck.Parent = autoWinsFrame
+autoWinsCheck.Size = UDim2.new(0.2, 0, 1, 0)
+autoWinsCheck.Position = UDim2.new(0.8, 0, 0, 0)
+autoWinsCheck.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+autoWinsCheck.Text = "✓"
+autoWinsCheck.TextColor3 = Color3.fromRGB(255, 255, 255)
+autoWinsCheck.TextSize = 24
+
+-- Membuat Checkbox "Auto Hatch"
+local autoHatchFrame = Instance.new("Frame")
+autoHatchFrame.Name = "AutoHatchFrame"
+autoHatchFrame.Parent = mainFrame
+autoHatchFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+autoHatchFrame.BackgroundTransparency = 1
+autoHatchFrame.Size = UDim2.new(1, -20, 0, 40)
+autoHatchFrame.LayoutOrder = 6
+
+local autoHatchLabel = Instance.new("TextLabel")
+autoHatchLabel.Name = "AutoHatchLabel"
+autoHatchLabel.Parent = autoHatchFrame
+autoHatchLabel.Size = UDim2.new(0.8, 0, 1, 0)
+autoHatchLabel.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+autoHatchLabel.BackgroundTransparency = 1
+autoHatchLabel.Font = Enum.Font.SourceSans
+autoHatchLabel.Text = "Auto Hatch (Nearest)"
+autoHatchLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+autoHatchLabel.TextSize = 18
+autoHatchLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+local autoHatchCheck = Instance.new("TextButton")
+autoHatchCheck.Name = "AutoHatchCheck"
+autoHatchCheck.Parent = autoHatchFrame
+autoHatchCheck.Size = UDim2.new(0.2, 0, 1, 0)
+autoHatchCheck.Position = UDim2.new(0.8, 0, 0, 0)
+autoHatchCheck.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
+autoHatchCheck.Text = ""
+autoHatchCheck.TextColor3 = Color3.fromRGB(255, 255, 255)
+autoHatchCheck.TextSize = 24
+
+-- Membuat Label YouTube
+local youtubeLabel = Instance.new("TextLabel")
+youtubeLabel.Name = "YoutubeLabel"
+youtubeLabel.Parent = mainFrame
+youtubeLabel.Size = UDim2.new(1, 0, 0, 50)
+youtubeLabel.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+youtubeLabel.BackgroundTransparency = 1
+youtubeLabel.Font = Enum.Font.SourceSans
+youtubeLabel.Text = "YouTube: Tora IsMe"
+youtubeLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+youtubeLabel.TextSize = 18
+youtubeLabel.LayoutOrder = 7
