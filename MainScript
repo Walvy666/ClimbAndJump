@@ -207,6 +207,29 @@ youtubeLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 youtubeLabel.TextSize = 18
 youtubeLabel.LayoutOrder = 7
 
+-- Tombol Minimize
+local minimizeButton = Instance.new("TextButton")
+minimizeButton.Name = "MinimizeButton"
+minimizeButton.Parent = mainFrame
+minimizeButton.Size = UDim2.new(0, 30, 0, 30)
+minimizeButton.Position = UDim2.new(1, -35, 0, 5)
+minimizeButton.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
+minimizeButton.Text = "-"
+minimizeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+minimizeButton.TextSize = 24
+
+-- Tombol Open
+local openButton = Instance.new("TextButton")
+openButton.Name = "OpenButton"
+openButton.Parent = screenGui
+openButton.Size = UDim2.new(0, 150, 0, 50)
+openButton.Position = UDim2.new(0.5, -75, 0.5, -25)
+openButton.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+openButton.Text = "Open"
+openButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+openButton.TextSize = 24
+openButton.Visible = false
+
 -- Fungsi untuk checkbox
 local autoCoinsOn = true
 local autoWinsOn = true
@@ -256,6 +279,17 @@ setHeightBox.FocusLost:Connect(function(enterPressed)
 			height = newHeight
 		end
 	end
+end)
+
+-- Fungsi Minimize/Maximize
+minimizeButton.MouseButton1Click:Connect(function()
+	mainFrame.Visible = false
+	openButton.Visible = true
+end)
+
+openButton.MouseButton1Click:Connect(function()
+	mainFrame.Visible = true
+	openButton.Visible = false
 end)
 
 -- Core Logic
