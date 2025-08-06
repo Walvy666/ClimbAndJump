@@ -1,0 +1,45 @@
+local TeleportService = game:GetService("TeleportService")
+local HttpService = game:GetService("HttpService")
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local PlaceId = game.PlaceId
+
+local function getRandomServer()
+    local cursor = ""
+    local foundServer = false
+    local currentJobId = game.JobId
+
+    while not foundServer do
+        local url = string.format("https://games.roblox.com/v1/games/%s/servers/Public?sortOrder=Asc&limit=100&cursor=%s", PlaceId, cursor)
+        local success, result = pcall(function()
+            return HttpService:JSONDecode(game:HttpGet(url))
+        end)
+
+        if success and result and result.data then
+            for _, server in ipairs(result.data) do
+                if server.playing < server.maxPlayers and server.id ~= currentJobId then
+                    return server.id
+                end
+            end
+            cursor = result.nextPageCursor or ""
+            if not cursor then break end
+        else
+            warn("Failed to fetch servers.")
+            break
+        end
+    end
+
+    return nil
+end
+
+local function hopServer()
+    local serverId = getRandomServer()
+    if serverId then
+        TeleportService:TeleportToPlaceInstance(PlaceId, serverId, LocalPlayer)
+    else
+        warn("No suitable server found.")
+    end
+end
+
+-- Jalankan auto hop
+hopServer()
